@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container text-center mt-2">
+        <h1>ToDo list</h1>
+        <input type="text" class="form-control" id="task" placeholder="add ToDo">
+        <div class="container mt-2">
+            <div class="container text-center mt-2">
+                
+            <button type="button" class="btn btn-primary mt-2" onclick="add_todo()">add to do</button>
+            <br>
+            </div>
+            <div class="list-group" id="result"></div>
+            <button class="btn btn-dark mt-5" onclick="clear_ToDo()">CLEAR ToDo</button>
+    
+        </div>
+        <script>
+        function add_todo(){
+            var x  =document.getElementById('task').value
+            const node=document.createElement('div')
+            node.className="list-group-item list-group-item-primary mb-2"
+            const textnode = document.createTextNode(x)
+            node.appendChild(textnode)
+            var b=document.createElement('button')
+            b.className="btn btn-danger"
+            b.textContent="delete"
+            b.style="float:right;"
+            b.onclick=delete_ToDo
+            node.appendChild(b)
+            var e=document.createElement('button')
+            e.className="btn btn-warning"   
+            e.textContent="edit"
+            e.style="float:right;"
+            e.onclick =edit_todo
+            node.appendChild(e)
+            document.getElementById('result').appendChild(node)
+            document.getElementById('task').value= ""
+            
+        } 
+        function clear_ToDo(){
+            document.getElementById('result').innerHTML= ""
+        }
+        function delete_ToDo(e){
+            e.target.parentElement.remove()
+        }
+        function edit_todo(e){
+            const newdiv = document.createElement('div')
+            newdiv.className="container text-center mt-3"
+            var i=document.createElement('input')
+            i.className="form-control mt-3"
+            i.setAttribute=("type","text")
+            newdiv.appendChild(i)
+            var b1=document.createElement('button')
+            b1.className="btn btn-info"
+            b1.textContent="UPDATE"
+            b1.onclick=edit_text
+            newdiv.appendChild(b1)
+            var b2 = document.createElement('button')
+            b2.className = "btn btn-danger"
+            b2.textContent = "Close"
+            b2.onclick = close_box
+            newdiv.appendChild(b2)
+            
+            e.target.parentElement.appendChild(newdiv)
+        }
+        function edit_text(e){
+            y=e.target.parentElement.firstChild.value
+            const textnode1=document.createTextNode(y)
+            e.target.parentElement.parentElement.replaceChild(textnode1,e.target.parentElement.parentElement.firstChild)
+            e.target.parentElement.remove()
+
+        }
+        function close_box(e){  
+    e.target.parentElement.remove()
+}
+        
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+</body>
+</html>
